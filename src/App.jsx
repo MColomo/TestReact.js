@@ -1,27 +1,20 @@
-import { useState, useEffect, Component } from "react";
-import ProductMatrix from './components/ProductMatrix'
+import Layout from './pages/Layout'
+import Index from './pages/Index'
+import Details from './pages/Details'
 import "./App.css";
 
+import { BrowserRouter, Route, Routes ,Navigate } from 'react-router-dom';
+
 function App() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    const url = "https://dulces-petalos.herokuapp.com/api/product";
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => setPosts(data));
-  }, []);
-
-  return (
-      <article>
-        <h1>Floristería Dulces Pétalos
-        {/* #TODO: Navegar a home */}
-        {/* #TODO: Breadcrumbs */}
-        </h1>
-        <ProductMatrix
-          allProducts={posts}
-          nColumns={4}/>
-      </article>
+  return(
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Layout/>}>
+          <Route index element={<Index/>} />
+          <Route path='/:productId' element={<Details/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

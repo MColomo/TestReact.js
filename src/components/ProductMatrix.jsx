@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import Product from './Product'
 
 function ProductMatrix({ allProducts, nColumns }) {
@@ -5,9 +6,7 @@ function ProductMatrix({ allProducts, nColumns }) {
     return (
       <div>
         {matrix.map((row, rowIndex) => ( 
-          <div key={rowIndex} 
-          style={{ display: 'flex', marginBottom: '10px' }}
-          >
+          <div key={rowIndex} style={{ display: 'flex', marginBottom: '10px' }} >
             {row.map((item, colIndex) => ( 
               <div
                 key={colIndex}
@@ -15,8 +14,10 @@ function ProductMatrix({ allProducts, nColumns }) {
                   padding: '10px'
                 }}
               >
-                {<Product 
-                  productInfo={item}/>}
+                <Link to={`/${item.id}`}>
+                  {<Product 
+                    productInfo={item}/>}
+                </Link>
               </div>
             ))}
           </div>
@@ -34,4 +35,4 @@ for (let i = 0; i < products.length; i += nColumns) {
 return matrix;
 }
 
-  export default ProductMatrix;
+export default ProductMatrix;
